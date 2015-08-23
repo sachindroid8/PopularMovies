@@ -72,13 +72,13 @@ public class MainActivity extends AppCompatActivity {
         //CheckInternetConnection();
         gridView = (GridView) findViewById(R.id.gridView);
 
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             CheckInternetConnection();
             movieArrayList.clear();
             movieArrayList = savedInstanceState.getParcelableArrayList(MOVIE_LIST_STATE);
             gridViewAdapter = new GridViewAdapter(MainActivity.this, movieArrayList);
             gridView.setAdapter(gridViewAdapter);
-        }else{
+        } else {
             CheckInternetConnection();
             String url = getRequestURL("popularity");
             sendAPIRequest(url);

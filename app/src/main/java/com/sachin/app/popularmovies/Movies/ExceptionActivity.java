@@ -37,8 +37,8 @@ public class ExceptionActivity extends AppCompatActivity {
                     Intent i = new Intent(ExceptionActivity.this, MainActivity.class);
                     startActivity(i);
                     finish();
-                }else{
-                    Toast.makeText(ExceptionActivity.this,"No Internet", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ExceptionActivity.this, "No Internet", Toast.LENGTH_SHORT).show();
                 }
 
             }
