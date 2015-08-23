@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sachin.app.popularmovies.Movies.ExceptionActivity">
+
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar" />
+
+    <ImageView
+        android:id="@+id/exceptionImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/nointernet" />
+
+    <TextView
+        android:id="@+id/exceptionTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/exceptionImage"
+        android:layout_centerHorizontal="true"
+        android:text="No Internet Connection"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/exceptionAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/exceptionTxt"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="@dimen/container_top"
+        android:text="Try Again"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/accentColor" />
+
+</RelativeLayout>

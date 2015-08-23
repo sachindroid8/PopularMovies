@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">PopularMovies</string>
+    <string name="title_activity_main">Popular Movies</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="sort">SortBy</string>
+    <string name="popular">Most Popular</string>
+    <string name="rated">Highest Rated</string>
+    <string name="overview">Overview</string>
+    <string name="selectedImage">selectedImage</string>
+    <string name="title_activity_details">DetailsActivity</string>
+    <string name="title_activity_exception">ExceptionActivity</string>
+</resources>
