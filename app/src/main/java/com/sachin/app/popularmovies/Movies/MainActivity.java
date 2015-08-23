@@ -43,6 +43,7 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String MOVIE_LIST_STATE = "movie_list_state";
     private Toolbar toolBar;
     private GridView gridView;
     private GridViewAdapter gridViewAdapter;
@@ -68,15 +69,23 @@ public class MainActivity extends AppCompatActivity {
         toolBar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolBar);
 
-        CheckInternetConnection();
-
-        //String url = "http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=f32b1f215852e02635b66b2ffa779c13";
+        //CheckInternetConnection();
         gridView = (GridView) findViewById(R.id.gridView);
-        String url = getRequestURL("popularity");
-        sendAPIRequest(url);
 
-        Parcelable state = gridView.onSaveInstanceState();
-        gridView.onRestoreInstanceState(state);
+        if(savedInstanceState != null){
+            CheckInternetConnection();
+            movieArrayList.clear();
+            movieArrayList = savedInstanceState.getParcelableArrayList(MOVIE_LIST_STATE);
+            gridViewAdapter = new GridViewAdapter(MainActivity.this, movieArrayList);
+            gridView.setAdapter(gridViewAdapter);
+        }else{
+            CheckInternetConnection();
+            String url = getRequestURL("popularity");
+            sendAPIRequest(url);
+        }
+
+        //Parcelable state = gridView.onSaveInstanceState();
+        //gridView.onRestoreInstanceState(state);
     }
 
     @Override
@@ -269,19 +278,21 @@ public class MainActivity extends AppCompatActivity {
     private void CheckInternetConnection() {
         if (!CheckConnection.isConnection(MainActivity.this)) {
             Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(MainActivity.this, ExceptionActivity.class);
-            startActivity(i);
+            //Intent i = new Intent(MainActivity.this, ExceptionActivity.class);
+            //startActivity(i);
         }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(MOVIE_LIST_STATE, movieArrayList);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+        movieArrayList = savedInstanceState.getParcelableArrayList(MOVIE_LIST_STATE);
     }
 
 }

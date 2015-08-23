@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.util.DisplayMetrics;
@@ -51,7 +52,7 @@ public class GridViewAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        ImageView thumbnails;
+        final ImageView thumbnails;
         if (convertView == null) {
             thumbnails = new ImageView(context);
             convertView = thumbnails;
@@ -60,13 +61,14 @@ public class GridViewAdapter extends BaseAdapter {
         } else {
             thumbnails = (ImageView) convertView;
         }
-
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
 
         Picasso.with(context).load(String.valueOf(items.get(position).getPoster_path())).resize(width / 2, height / 3).into(thumbnails);
+        thumbnails.buildDrawingCache();
+        final Bitmap bitmap = thumbnails.getDrawingCache();
         thumbnails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +86,7 @@ public class GridViewAdapter extends BaseAdapter {
                 i.putExtra("ratings", items.get(position).getVote_average());
                 i.putExtra("users", items.get(position).getVote_count());
                 i.putExtra("overview", items.get(position).getOverview());
-
+                i.putExtra("BitmapImage", bitmap);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                     context.startActivity(i, options.toBundle());
                 } else {

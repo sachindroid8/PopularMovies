@@ -1,11 +1,14 @@
 package com.sachin.app.popularmovies.Pojo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
 /**
  * Created by Sachin on 22/08/15.
  */
-public class Movie {
+public class Movie implements Parcelable {
 
     private long id;
     private boolean adult;
@@ -40,6 +43,31 @@ public class Movie {
     public Movie() {
 
     }
+
+    protected Movie(Parcel in) {
+        id = in.readLong();
+        backdrop_path = in.readString();
+        original_language = in.readString();
+        original_title = in.readString();
+        overview = in.readString();
+        poster_path = in.readString();
+        popularity = in.readDouble();
+        title = in.readString();
+        vote_average = in.readDouble();
+        vote_count = in.readLong();
+    }
+
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel in) {
+            return new Movie(in);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
 
     public long getId() {
         return id;
@@ -160,5 +188,24 @@ public class Movie {
                 "\nvideo " + video +
                 "\nvote_average " + vote_average +
                 "\nvote_count " + vote_count;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeString(backdrop_path);
+        dest.writeString(original_language);
+        dest.writeString(original_title);
+        dest.writeString(overview);
+        dest.writeString(poster_path);
+        dest.writeDouble(popularity);
+        dest.writeString(title);
+        dest.writeDouble(vote_average);
+        dest.writeLong(vote_count);
     }
 }
