@@ -271,7 +271,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
             Intent i = new Intent(MainActivity.this, ExceptionActivity.class);
             startActivity(i);
-            finish();
         }
     }
 
