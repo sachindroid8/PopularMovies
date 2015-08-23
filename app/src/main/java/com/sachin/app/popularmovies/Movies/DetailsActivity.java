@@ -67,7 +67,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         // Converting the image into a bitmap
         //Bitmap img = getBitmapFromURL(getIntent().getExtras().getString("poster"));
-        new MyAsyncTask().execute(getIntent().getExtras().getString("poster"));
+        new MyAsyncTask().execute(getIntent().getExtras().getString("backdrop"));
 
 
         // Getting the different types of colors from the Image
@@ -106,21 +106,6 @@ public class DetailsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public static Bitmap getBitmapFromURL(String src) {
-        try {
-            URL url = new URL(src);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     private class MyAsyncTask extends AsyncTask<String, Void, Bitmap> {
