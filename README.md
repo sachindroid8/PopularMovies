@@ -2,7 +2,7 @@
 This project is for Udacity's Android Developer Nanodegree - Popular Movies: Stage 1.<br>
 Please enter the tmdb API KEY in Constants.java. <br>
 public static final String API_KEY = "ENTER YOUR API KEY HERE"; <br>
-
+<br>
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="69LQCV6BYX2TU">
