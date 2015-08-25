@@ -1,10 +1,9 @@
 package com.sachin.app.popularmovies.Movies;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.util.DisplayMetrics;
@@ -12,10 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.sachin.app.popularmovies.Pojo.Movie;
-import com.sachin.app.popularmovies.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -63,10 +60,16 @@ public class GridViewAdapter extends BaseAdapter {
         }
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int heightRatio = 4;
+        int widthRatio = 2;
+        if(context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            widthRatio = 2;
+            heightRatio = 2;
+        }
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
 
-        Picasso.with(context).load(String.valueOf(items.get(position).getPoster_path())).resize(width / 2, height / 3).into(thumbnails);
+        Picasso.with(context).load(String.valueOf(items.get(position).getPoster_path())).resize(width / widthRatio, height / heightRatio).into(thumbnails);
         thumbnails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

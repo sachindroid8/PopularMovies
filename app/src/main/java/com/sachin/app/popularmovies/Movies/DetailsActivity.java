@@ -15,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.sachin.app.popularmovies.R;
 import com.squareup.picasso.Picasso;
 
