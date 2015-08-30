@@ -1,5 +1,8 @@
 package com.sachin.app.popularmovies.Movies;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -11,10 +14,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
+import android.transition.Fade;
+import android.transition.Transition;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.sachin.app.popularmovies.R;
 import com.squareup.picasso.Picasso;
 
@@ -32,6 +41,8 @@ public class DetailsActivity extends AppCompatActivity {
     Palette palette;
     float[] vibrant = null;
     float[] vibrantlight = null;
+    private View bgViewGroup;
+    private static final long ANIM_DURATION = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +77,6 @@ public class DetailsActivity extends AppCompatActivity {
 
         // Converting the image into a bitmap
         //Bitmap img = getBitmapFromURL(getIntent().getExtras().getString("poster"));
-        new MyAsyncTask().execute(getIntent().getExtras().getString("backdrop"));
 
 
         // Getting the different types of colors from the Image
@@ -77,6 +87,12 @@ public class DetailsActivity extends AppCompatActivity {
         setSupportActionBar(toolBar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setupLayout();
+            setupWindowAnimations();
+
+        }
 
 
     }
@@ -105,6 +121,16 @@ public class DetailsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setupLayout() {
+        bgViewGroup = findViewById(R.id.cv);
+    }
+
+    @TargetApi(21)
+    private void setupWindowAnimations() {
+        setupEnterAnimations();
+        //setupExitAnimations();
     }
 
     private class MyAsyncTask extends AsyncTask<String, Void, Bitmap> {
@@ -166,6 +192,96 @@ public class DetailsActivity extends AppCompatActivity {
 
             }
         }
+    }
+
+    @TargetApi(21)
+    private void setupEnterAnimations() {
+        Transition enterTransition = getWindow().getSharedElementEnterTransition();
+        enterTransition.addListener(new Transition.TransitionListener() {
+            @Override
+            public void onTransitionStart(Transition transition) {
+                new MyAsyncTask().execute(getIntent().getExtras().getString("backdrop"));
+            }
+
+            @Override
+            public void onTransitionEnd(Transition transition) {
+                animateRevealShow(bgViewGroup);
+            }
+
+            @Override
+            public void onTransitionCancel(Transition transition) {
+            }
+
+            @Override
+            public void onTransitionPause(Transition transition) {
+            }
+
+            @Override
+            public void onTransitionResume(Transition transition) {
+            }
+        });
+    }
+
+    @TargetApi(21)
+    private void setupExitAnimations() {
+        Transition sharedElementReturnTransition = getWindow().getSharedElementReturnTransition();
+        sharedElementReturnTransition.setStartDelay(ANIM_DURATION);
+
+
+        Transition returnTransition = getWindow().getReturnTransition();
+        returnTransition.setDuration(ANIM_DURATION);
+        returnTransition.addListener(new Transition.TransitionListener() {
+            @Override
+            public void onTransitionStart(Transition transition) {
+                animateRevealHide(bgViewGroup);
+            }
+
+            @Override
+            public void onTransitionEnd(Transition transition) {
+            }
+
+            @Override
+            public void onTransitionCancel(Transition transition) {
+            }
+
+            @Override
+            public void onTransitionPause(Transition transition) {
+            }
+
+            @Override
+            public void onTransitionResume(Transition transition) {
+            }
+        });
+    }
+
+    @TargetApi(21)
+    private void animateRevealShow(View viewRoot) {
+        int cx = (viewRoot.getLeft() + viewRoot.getRight()) / 2;
+        int cy = (viewRoot.getTop() + viewRoot.getBottom()) / 2;
+        int finalRadius = Math.max(viewRoot.getWidth(), viewRoot.getHeight());
+
+        Animator anim = ViewAnimationUtils.createCircularReveal(viewRoot, cx, cy, 0, finalRadius);
+        viewRoot.setVisibility(View.VISIBLE);
+        anim.setDuration(ANIM_DURATION);
+        anim.start();
+    }
+
+    @TargetApi(21)
+    private void animateRevealHide(final View viewRoot) {
+        int cx = (viewRoot.getLeft() + viewRoot.getRight()) / 2;
+        int cy = (viewRoot.getTop() + viewRoot.getBottom()) / 2;
+        int initialRadius = viewRoot.getWidth();
+
+        Animator anim = ViewAnimationUtils.createCircularReveal(viewRoot, cx, cy, initialRadius, 0);
+        anim.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                viewRoot.setVisibility(View.INVISIBLE);
+            }
+        });
+        anim.setDuration(ANIM_DURATION);
+        anim.start();
     }
 
 

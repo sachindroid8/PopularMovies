@@ -6,4 +6,5 @@
 
     <color name="primaryTextColor">#FFFFFF</color>
     <color name="primaryTextColorTint">#99000000</color>
+    <color name="backgroundColor">#161C27</color>
 </resources>

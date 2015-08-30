@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private JSONObject jsonResultObject;
     private ArrayList<Movie> movieArrayList = new ArrayList<>();
     private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
+    private View bgViewGroup;
 
     String[] items;
 
@@ -84,8 +84,6 @@ public class MainActivity extends AppCompatActivity {
             sendAPIRequest(url);
         }
 
-        //Parcelable state = gridView.onSaveInstanceState();
-        //gridView.onRestoreInstanceState(state);
     }
 
     @Override

@@ -53,14 +53,14 @@ public class GridViewAdapter extends BaseAdapter {
         if (convertView == null) {
             thumbnails = new ImageView(context);
             convertView = thumbnails;
-            thumbnails.setPadding(4, 4, 4, 4);
+            thumbnails.setPadding(16, 16, 16, 16);
             thumbnails.setScaleType(ImageView.ScaleType.FIT_XY);
         } else {
             thumbnails = (ImageView) convertView;
         }
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int heightRatio = 4;
+        int heightRatio = 3;
         int widthRatio = 2;
         if(context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
             widthRatio = 2;
