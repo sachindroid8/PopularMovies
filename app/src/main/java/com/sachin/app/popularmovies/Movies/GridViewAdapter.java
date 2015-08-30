@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.util.DisplayMetrics;
@@ -13,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.sachin.app.popularmovies.Pojo.Movie;
+import com.sachin.app.popularmovies.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
