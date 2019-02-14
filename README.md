@@ -1,6 +1,7 @@
 # PopularMovies
 This project is for Udacity's Android Developer Nanodegree - Popular Movies: Stage 1.<br>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ic9lAcvgrTs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+[![PopularMovies Android App](http://img.youtube.com/vi/ic9lAcvgrTs/0.jpg)](https://youtu.be/ic9lAcvgrTs)
 
 Please enter the tmdb API KEY in Constants.java. <br>
 - public static final String API_KEY = "ENTER YOUR API KEY HERE"; <br>
