@@ -13,7 +13,3 @@ Please enter the tmdb API KEY in Constants.java. <br>
 - Implemented Parcelable.<br>
 <br>
  
-
-
-If you like this project. Donate here: <br>
-https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=69LQCV6BYX2TU
